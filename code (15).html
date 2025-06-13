@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Optimization: Enhanced Title and Description -->
+    <title>OptiImage - Free Online Image Compressor, Resizer & DPI Changer</title>
+    <meta name="description" content="OptiImage: Free online tool to compress, resize, and change DPI of images. Optimize your photos for web, email, or print by reducing file size and adjusting dimensions. Supports JPEG, PNG, WebP.">
+    <meta name="keywords" content="OptiImage, image compressor, image resizer, change image DPI, online image editor, reduce image size, compress JPEG, compress PNG, image optimizer, DPI converter, free image tool, resize photos, web image optimization, print image DPI">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google AdSense Integration (Replace with your actual IDs) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+
+    <!-- Schema.org Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "OptiImage",
+      "operatingSystem": "Web",
+      "applicationCategory": "Multimedia",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "150"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Free online tool to compress, resize, and change DPI of images. Optimize your photos for web, email, or print.",
+      "featureList": [
+        "Image compression (JPEG, PNG, WebP)",
+        "Image resizing by pixels, inches, or centimeters",
+        "DPI adjustment for print resolution",
+        "Aspect ratio locking",
+        "Live preview and comparison",
+        "No server upload (browser-based processing)"
+      ]
+    }
+    </script>
+
+    <style>
+        /* --- CSS Variables for Theming --- */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --success: #28a745;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border: #dee2e6;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --light: #1a1a1a;
+            --dark: #f8f9fa;
+            --light-gray: #2d2d2d;
+            --border: #444;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header Styles --- */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* --- Main Content Layout --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 30px 0;
+            flex: 1;
+        }
+
+        @media (min-width: 992px) {
+            .main-content {
+                grid-template-columns: 3fr 1fr;
+            }
+        }
+
+        /* --- Card Styles --- */
+        .card {
+            background: var(--light);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title i {
+            font-size: 1.5rem;
+        }
+
+        /* --- Upload Area --- */
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        /* --- Form Elements --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slider {
+            flex: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            background: var(--light-gray);
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--primary-dark);
+        }
+
+        .slider-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--light);
+            color: var(--dark);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .dimension-inputs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .dimension-inputs > div {
+            flex: 1;
+        }
+
+        .unit-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .unit-btn {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .unit-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* --- Preview & Stats --- */
+        .preview-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .preview-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .preview-box {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .preview-title {
+            background: var(--light-gray);
+            padding: 12px 15px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            color: var(--dark);
+        }
+
+        .preview-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+            padding: 20px;
+            background: repeating-conic-gradient(#f0f0f0 0% 25%, #f8f8f8 0% 50%) 50% / 20px 20px;
+        }
+
+        [data-theme="dark"] .preview-image {
+            background: repeating-conic-gradient(#222 0% 25%, #2a2a2a 0% 50%) 50% / 20px 20px;
+        }
+
+        .preview-image img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .stat-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* --- Footer Styles --- */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        /* --- Advertisement Container --- */
+        .ad-container {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .ad-label {
+            color: var(--gray);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .ad-placeholder {
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            border-radius: 5px;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* --- Tooltips --- */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            margin-left: 5px;
+            color: var(--gray);
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 240px;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            font-weight: normal;
+            white-space: normal;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* --- Tabs --- */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* --- Info Text & Steps --- */
+        .info-text {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        [data-theme="dark"] .info-text {
+            background: #2a3a4d;
+            color: var(--light);
+        }
+
+        .info-text i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            margin: 20px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            color: var(--primary);
+        }
+        
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            color: var(--dark);
+        }
+
+        [data-theme="dark"] .step {
+            background: #2a2a2a;
+            color: var(--light);
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        /* --- Image Compare Slider --- */
+        .compare-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-top: 20px;
+            user-select: none;
+        }
+        
+        .compare-before, .compare-after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .compare-after {
+            width: 50%;
+            border-right: 2px solid white;
+            box-shadow: 3px 0 5px rgba(0,0,0,0.2);
+        }
+        
+        .compare-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: white;
+            cursor: col-resize;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        
+        .compare-handle::after {
+            content: "↔";
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            width: 34px;
+            height: 34px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-50%);
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            color: var(--dark);
+        }
+        
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .dimension-inputs {
+                flex-direction: column;
+            }
+            
+            .card {
+                padding: 20px 15px;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 12px;
+            }
+            
+            .slider-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        /* --- Processing Overlay --- */
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            font-size: 1.5rem;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .processing-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid var(--primary);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Processing Overlay -->
+    <div class="processing-overlay" id="processingOverlay">
+        <div class="spinner"></div>
+        <span>Processing image...</span>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-image"></i>
+                    <h1>OptiImage</h1> <!-- SEO: Use H1 for main page title -->
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i> Dark Mode
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="main-tool">
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-cloud-upload-alt"></i> Upload Your Image</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon"><i class="fas fa-file-image"></i></div>
+                        <h3>Drag & Drop Your Image Here</h3>
+                        <p>or</p>
+                        <button class="btn" id="browseBtn"><i class="fas fa-folder-open"></i> Browse Files</button>
+                        <p class="small">Supports JPEG, PNG, WebP, TIFF, BMP, PSD</p>
+                        <input type="file" id="fileInput" accept="image/jpeg, image/png, image/webp, image/tiff, image/bmp, image/psd" style="display: none;">
+                    </div>
+                    
+                    <div class="info-text">
+                        <i class="fas fa-info-circle"></i> 
+                        <strong>Privacy Note:</strong> All image processing happens directly in your browser. Your files are never uploaded to any server.
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="compression">Compression</div>
+                    <div class="tab" data-tab="resize">Resize & DPI</div>
+                </div>
+
+                <div class="tab-content active" id="compressionTab">
+                    <div class="card">
+                        <h2 class="card-title"><i class="fas fa-compress-alt"></i> Compression Settings</h2>
+                        <div class="form-group">
+                            <label for="quality">Quality Level: <span id="qualityValue">85</span>%</label>
+                            <div class="slider-container">
+                                <input type="range" id="quality" class="slider" min="0" max="100" value="85">
+                                <span class="slider-value" id="qualityPercent">85%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <small>Smaller File</small>
+                                <small>Better Quality</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="format">Output Format:</label>
+                            <select id="format">
+                                <option value="jpeg">JPEG (Best for photos)</option>
+                                <option value="png">PNG (Best for graphics with transparency)</option>
+                                <option value="webp">WebP (Modern format, good compression)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="resizeTab">
+                    <div class="card">
+                        <h2 class="card-title"><i class="fas fa-expand-alt"></i> Resize & DPI Settings</h2>
+                        
+                        <div class="form-group">
+                            <label>Measurement Unit:</label>
+                            <div class="unit-selector">
+                                <div class="unit-btn active" data-unit="pixels">Pixels</div>
+                                <div class="unit-btn" data-unit="inches">Inches</div>
+                                <div class="unit-btn" data-unit="cm">Centimeters</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="lockAspect" checked>
+                                <label for="lockAspect">Lock Aspect Ratio</label>
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span class="tooltip-text">Maintain the original width/height ratio to prevent distortion.</span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Dimensions:</label>
+                            <div class="dimension-inputs">
+                                <div>
+                                    <label for="widthInput">Width</label>
+                                    <input type="number" id="widthInput" min="1" placeholder="Auto" value="">
+                                </div>
+                                <div>
+                                    <label for="heightInput">Height</label>
+                                    <input type="number" id="heightInput" min="1" placeholder="Auto" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="dpiGroup">
+                            <label for="dpiSelect">DPI (Dots Per Inch):</label>
+                            <select id="dpiSelect">
+                                <option value="72">72 DPI (Standard Web)</option>
+                                <option value="96">96 DPI (Windows Default)</option>
+                                <option value="150">150 DPI (Good Quality Print)</option>
+                                <option value="300" selected>300 DPI (High Quality Print)</option>
+                                <option value="600">600 DPI (Professional Print)</option>
+                                <option value="custom">Custom DPI</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="customDpiInputGroup" style="display: none;">
+                            <label for="customDpiInput">Custom DPI Value:</label>
+                            <input type="number" id="customDpiInput" min="1" max="2400" value="300">
+                        </div>
+
+                        <div class="info-text">
+                            <i class="fas fa-info-circle"></i> 
+                            <strong>DPI Note:</strong> This tool adjusts the pixel dimensions of your image to achieve the selected Dots Per Inch (DPI) for your chosen physical size. It ensures your image prints correctly at that resolution. Direct modification of the image's internal DPI metadata tag is not natively supported by browsers without specialized libraries.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-eye"></i> Live Preview & Results</h2>
+                    <div class="preview-container">
+                        <div class="preview-box">
+                            <div class="preview-title">Original Image</div>
+                            <div class="preview-image" id="originalPreview">
+                                <p>Upload an image to see preview</p>
+                            </div>
+                        </div>
+                        <div class="preview-box">
+                            <div class="preview-title">Processed Image</div>
+                            <div class="preview-image" id="processedPreview">
+                                <p>Processed image will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="compare-container" id="compareContainer" style="display: none;">
+                        <div class="compare-before" id="compareBefore" role="img" aria-label="Original image before processing"></div>
+                        <div class="compare-after" id="compareAfter" role="img" aria-label="Processed image after changes"></div>
+                        <div class="compare-handle" id="compareHandle"></div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Original Size</div>
+                            <div class="stat-value" id="originalSizeDisplay">0 KB</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Compressed Size</div>
+                            <div class="stat-value" id="compressedSizeDisplay">0 KB</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Reduction</div>
+                            <div class="stat-value" id="reductionPercentDisplay">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">New Dimensions</div>
+                            <div class="stat-value" id="newDimensionsDisplay">0×0 px</div>
+                        </div>
+                         <div class="stat-card" id="newPhysicalSizeCard" style="display:none;">
+                            <div class="stat-label">New Print Size</div>
+                            <div class="stat-value" id="newPhysicalSizeDisplay">0×0 in</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success" id="downloadBtn" style="width: 100%; margin-top: 20px;" disabled>
+                        <i class="fas fa-download"></i> Download Optimized Image
+                    </button>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="ad-container">
+                    <div class="ad-label">Advertisement</div>
+                    <!-- AdSense Slot: Replace data-ad-client and data-ad-slot with your actual values -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-1234567890123456"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-info-circle"></i> How to Use Our Tool</h2>
+                    <div class="step-container">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div>Upload your image using the button or drag and drop it into the area.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div>Adjust compression quality, output format, resize dimensions, and DPI settings.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div>Preview the changes in real-time and see the file size reduction instantly.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div>Download your newly optimized image for web or print use.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-lightbulb"></i> Pro Tips for Image Optimization</h2>
+                    <div class="info-text">
+                        <i class="fas fa-desktop"></i> 
+                        <strong>For Web Use:</strong> Aim for 72-96 DPI and use JPEG or WebP formats with a quality of 70-85% for fast loading times without significant visual loss.
+                    </div>
+                    <div class="info-text">
+                        <i class="fas fa-print"></i> 
+                        <strong>For Printing:</strong> Select 300-600 DPI. PNG is great for graphics, while JPEG at 90%+ quality works well for photos. Make sure your pixel dimensions are large enough for your desired print size.
+                    </div>
+                    <div class="info-text">
+                        <i class="fas fa-ruler-combined"></i> 
+                        <strong>Resizing Impact:</strong> Reducing the actual pixel dimensions of an image will have the most significant impact on file size reduction.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/privacy-policy"><i class="fas fa-lock"></i> Privacy Policy</a>
+                    <a href="/terms-of-service"><i class="fas fa-file-contract"></i> Terms of Service</a>
+                    <a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a>
+                    <a href="/help"><i class="fas fa-question-circle"></i> Help</a>
+                </div>
+                <div class="copyright">
+                    © 2023 OptiImage. All rights reserved. This tool runs entirely in your browser - your images are never uploaded to any server.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const uploadArea = document.getElementById('uploadArea');
+        const browseBtn = document.getElementById('browseBtn');
+        const fileInput = document.getElementById('fileInput');
+        const qualitySlider = document.getElementById('quality');
+        const qualityPercent = document.getElementById('qualityPercent');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const originalPreview = document.getElementById('originalPreview');
+        const processedPreview = document.getElementById('processedPreview');
+        const compareContainer = document.getElementById('compareContainer');
+        const originalSizeDisplay = document.getElementById('originalSizeDisplay');
+        const compressedSizeDisplay = document.getElementById('compressedSizeDisplay');
+        const reductionPercentDisplay = document.getElementById('reductionPercentDisplay');
+        const newDimensionsDisplay = document.getElementById('newDimensionsDisplay');
+        const newPhysicalSizeCard = document.getElementById('newPhysicalSizeCard');
+        const newPhysicalSizeDisplay = document.getElementById('newPhysicalSizeDisplay');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const lockAspectCheckbox = document.getElementById('lockAspect');
+        const formatSelect = document.getElementById('format');
+        const processingOverlay = document.getElementById('processingOverlay');
+        const unitButtons = document.querySelectorAll('.unit-btn');
+        const dpiSelect = document.getElementById('dpiSelect');
+        const customDpiInputGroup = document.getElementById('customDpiInputGroup');
+        const customDpiInput = document.getElementById('customDpiInput');
+        
+        // State variables
+        let originalImage = null;
+        let originalFileName = '';
+        let originalFileSize = 0;
+        let originalImageWidth = 0;
+        let originalImageHeight = 0;
+        let originalDPI = 72; // Assume 72 DPI if not explicitly read from image metadata (browser limitation)
+        let processedImageBlob = null;
+        let currentUnit = 'pixels'; // Default unit for dimensions
+
+        // Constants for unit conversion
+        const INCHES_PER_CM = 0.393701;
+        const CM_PER_INCH = 2.54;
+
+        // Theme Toggle Functionality
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.innerHTML = isDark ? 
+                '<i class="fas fa-sun"></i> Light Mode' : 
+                '<i class="fas fa-moon"></i> Dark Mode';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark'); // Save theme preference
+        });
+
+        // Apply saved theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                themeToggle.innerHTML = savedTheme === 'dark' ? 
+                    '<i class="fas fa-sun"></i> Light Mode' : 
+                    '<i class="fas fa-moon"></i> Dark Mode';
+            } else {
+                // Default to light if no theme is saved or system preference (optional)
+                document.body.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+            }
+            // Initialize DPI dropdown visibility
+            toggleCustomDpiInput();
+        });
+
+        // File Upload Handling (Drag & Drop, Browse Button)
+        browseBtn.addEventListener('click', () => fileInput.click());
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault(); // Prevent default to allow drop
+            uploadArea.classList.add('drag-over');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+        
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+        
+        function handleFile(file) {
+            if (!file || !file.type.match('image.*')) {
+                alert('Please select a valid image file (JPEG, PNG, WEBP, TIFF, BMP, PSD)');
+                return;
+            }
+
+            originalFileName = file.name;
+            originalFileSize = file.size;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    originalImageWidth = originalImage.width;
+                    originalImageHeight = originalImage.height;
+                    // Reset current unit to pixels as original image is loaded in pixels
+                    currentUnit = 'pixels';
+                    unitButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('[data-unit="pixels"]').classList.add('active');
+
+                    originalPreview.innerHTML = `<img src="${e.target.result}" alt="Original Image">`;
+                    originalSizeDisplay.textContent = `${(originalFileSize / 1024).toFixed(1)} KB`;
+
+                    // Populate resize inputs with original dimensions in pixels
+                    widthInput.value = originalImageWidth;
+                    heightInput.value = originalImageHeight;
+                    
+                    // Trigger image processing with default settings
+                    processImage();
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file); // Read file as Data URL for preview
+        }
+        
+        // Tab Switching Logic
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const tabId = `${tab.dataset.tab}Tab`;
+                document.getElementById(tabId).classList.add('active');
+
+                // Re-process image if active image exists, as settings might have changed
+                if (originalImage) {
+                    processImage();
+                }
+            });
+        });
+        
+        // Quality Slider Event Listener
+        qualitySlider.addEventListener('input', () => {
+            qualityPercent.textContent = `${qualitySlider.value}%`;
+            if (originalImage) processImage();
+        });
+
+        // Format Select Event Listener
+        formatSelect.addEventListener('change', () => {
+            if (originalImage) processImage();
+        });
+
+        // Unit Selector Event Listeners
+        unitButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                unitButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentUnit = btn.dataset.unit;
+                updateDimensionInputs(originalImageWidth, originalImageHeight, getSelectedDPI(), currentUnit); // Update values based on new unit and current DPI
+                if (originalImage) processImage();
+            });
+        });
+
+        // DPI Select Event Listeners
+        dpiSelect.addEventListener('change', () => {
+            toggleCustomDpiInput();
+            if (originalImage) processImage();
+        });
+
+        customDpiInput.addEventListener('input', () => {
+            if (originalImage) processImage();
+        });
+
+        function toggleCustomDpiInput() {
+            customDpiInputGroup.style.display = dpiSelect.value === 'custom' ? 'block' : 'none';
+        }
+
+        // Dimension Input Event Listeners
+        widthInput.addEventListener('input', () => handleDimensionInput(true));
+        heightInput.addEventListener('input', () => handleDimensionInput(false));
+        lockAspectCheckbox.addEventListener('change', () => {
+            if (originalImage) {
+                // When toggling lock, re-evaluate dimensions based on current state
+                updateDimensionInputs(originalImageWidth, originalImageHeight, getSelectedDPI(), currentUnit);
+                processImage();
+            }
+        });
+
+        function handleDimensionInput(isWidth) {
+            if (!originalImage) return;
+
+            const lockAspect = lockAspectCheckbox.checked;
+            let currentDPI = getSelectedDPI();
+
+            let newWidthPx, newHeightPx; // These are pixel dimensions, regardless of input unit
+
+            if (currentUnit === 'pixels') {
+                newWidthPx = parseInt(widthInput.value);
+                newHeightPx = parseInt(heightInput.value);
+
+                // If input is empty, treat it as "not set" or revert to original for calculation
+                if (isNaN(newWidthPx)) newWidthPx = originalImageWidth;
+                if (isNaN(newHeightPx)) newHeightPx = originalImageHeight;
+
+                if (lockAspect) {
+                    if (isWidth && widthInput.value !== '') { // User changed width
+                        newHeightPx = Math.round(newWidthPx * (originalImageHeight / originalImageWidth));
+                        heightInput.value = newHeightPx;
+                    } else if (!isWidth && heightInput.value !== '') { // User changed height
+                        newWidthPx = Math.round(newHeightPx * (originalImageWidth / originalImageHeight));
+                        widthInput.value = newWidthPx;
+                    } else { // One or both empty, or lock toggled, revert to original ratio
+                        newWidthPx = originalImageWidth;
+                        newHeightPx = originalImageHeight;
+                        widthInput.value = originalImageWidth;
+                        heightInput.value = originalImageHeight;
+                    }
+                } else { // Aspect ratio not locked
+                    if (isWidth && widthInput.value === '') newWidthPx = originalImageWidth;
+                    if (!isWidth && heightInput.value === '') newHeightPx = originalImageHeight;
+                }
+            } else { // Inches or CM
+                let inputWidthPhysical = parseFloat(widthInput.value);
+                let inputHeightPhysical = parseFloat(heightInput.value);
+                
+                // If input is empty, use original physical dimensions for calculation
+                const originalWidthPhysicalInches = originalImageWidth / originalDPI;
+                const originalHeightPhysicalInches = originalImageHeight / originalDPI;
+
+                if (isNaN(inputWidthPhysical)) inputWidthPhysical = originalWidthPhysicalInches;
+                if (isNaN(inputHeightPhysical)) inputHeightPhysical = originalHeightPhysicalInches;
+
+                // Convert to inches for consistent calculation if current unit is CM
+                if (currentUnit === 'cm') {
+                    inputWidthPhysical *= INCHES_PER_CM;
+                    inputHeightPhysical *= INCHES_PER_CM;
+                }
+
+                if (lockAspect) {
+                    const originalAspectRatio = originalImageWidth / originalImageHeight; // Aspect ratio is always based on pixels
+                    if (isWidth && widthInput.value !== '') { // User changed width (physical)
+                        inputHeightPhysical = inputWidthPhysical / originalAspectRatio;
+                    } else if (!isWidth && heightInput.value !== '') { // User changed height (physical)
+                        inputWidthPhysical = inputHeightPhysical * originalAspectRatio;
+                    } else { // One or both empty, or lock toggled, revert to original ratio
+                        inputWidthPhysical = originalWidthPhysicalInches;
+                        inputHeightPhysical = originalHeightPhysicalInches;
+                    }
+                    // Update input fields with calculated physical dimensions
+                    if (currentUnit === 'cm') {
+                        widthInput.value = (inputWidthPhysical * CM_PER_INCH).toFixed(2);
+                        heightInput.value = (inputHeightPhysical * CM_PER_INCH).toFixed(2);
+                    } else {
+                        widthInput.value = inputWidthPhysical.toFixed(2);
+                        heightInput.value = inputHeightPhysical.toFixed(2);
+                    }
+                } else { // Aspect ratio not locked
+                    if (isWidth && widthInput.value === '') inputWidthPhysical = originalWidthPhysicalInches;
+                    if (!isWidth && heightInput.value === '') inputHeightPhysical = originalHeightPhysicalInches;
+                }
+            }
+            if (originalImage) processImage(); // Re-process image with updated dimensions
+        }
+
+        // Function to update dimension input fields based on current unit and DPI
+        function updateDimensionInputs(imgWidthPx, imgHeightPx, dpi, unit) {
+            if (unit === 'pixels') {
+                widthInput.value = imgWidthPx;
+                heightInput.value = imgHeightPx;
+                widthInput.placeholder = "Original Width";
+                heightInput.placeholder = "Original Height";
+                newPhysicalSizeCard.style.display = 'none'; // Hide physical size stat
+            } else { // Inches or CM
+                const widthInches = imgWidthPx / dpi;
+                const heightInches = imgHeightPx / dpi;
+                let widthDisplay, heightDisplay, unitLabel;
+
+                if (unit === 'inches') {
+                    widthDisplay = widthInches.toFixed(2);
+                    heightDisplay = heightInches.toFixed(2);
+                    unitLabel = 'in';
+                } else if (unit === 'cm') {
+                    widthDisplay = (widthInches * CM_PER_INCH).toFixed(2);
+                    heightDisplay = (heightInches * CM_PER_INCH).toFixed(2);
+                    unitLabel = 'cm';
+                }
+                widthInput.value = widthDisplay;
+                heightInput.value = heightDisplay;
+                widthInput.placeholder = `Original Width (${unitLabel})`;
+                heightInput.placeholder = `Original Height (${unitLabel})`;
+                newPhysicalSizeCard.style.display = 'block'; // Show physical size stat
+            }
+        }
+
+        // Helper to get the currently selected DPI value
+        function getSelectedDPI() {
+            let dpi = parseInt(dpiSelect.value);
+            if (dpiSelect.value === 'custom') {
+                dpi = parseInt(customDpiInput.value);
+                if (isNaN(dpi) || dpi <= 0) {
+                    dpi = 300; // Default to 300 if custom is invalid
+                    customDpiInput.value = 300;
+                }
+            }
+            return dpi;
+        }
+
+        // Main Asynchronous Image Processing Function
+        async function processImage() {
+            if (!originalImage) {
+                // Reset previews and stats if no image is loaded
+                processedPreview.innerHTML = '<p>Processed image will appear here</p>';
+                compareContainer.style.display = 'none';
+                compressedSizeDisplay.textContent = '0 KB';
+                reductionPercentDisplay.textContent = '0%';
+                newDimensionsDisplay.textContent = '0×0 px';
+                newPhysicalSizeDisplay.textContent = '0×0 in';
+                newPhysicalSizeCard.style.display = 'none';
+                downloadBtn.disabled = true;
+                return;
+            }
+
+            processingOverlay.classList.add('active'); // Show processing overlay
+            downloadBtn.disabled = true; // Disable download button during processing
+
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                let targetWidthPx, targetHeightPx;
+                let currentDPI = getSelectedDPI();
+
+                if (currentUnit === 'pixels') {
+                    // Get pixel dimensions directly from inputs, defaulting to original if invalid/empty
+                    targetWidthPx = parseInt(widthInput.value);
+                    targetHeightPx = parseInt(heightInput.value);
+
+                    // Ensure inputs are valid numbers; if not, use original dimensions
+                    if (isNaN(targetWidthPx) || targetWidthPx <= 0) targetWidthPx = originalImageWidth;
+                    if (isNaN(targetHeightPx) || targetHeightPx <= 0) targetHeightPx = originalImageHeight;
+
+                    // Apply aspect ratio lock for pixel mode
+                    if (lockAspectCheckbox.checked) {
+                        const originalAspectRatio = originalImageWidth / originalImageHeight;
+                        // Prioritize width input if provided, otherwise height
+                        if (widthInput.value && !heightInput.value) { 
+                            targetHeightPx = Math.round(targetWidthPx / originalAspectRatio);
+                            heightInput.value = targetHeightPx; // Update UI
+                        } else if (heightInput.value && !widthInput.value) {
+                            targetWidthPx = Math.round(targetHeightPx * originalAspectRatio);
+                            widthInput.value = targetWidthPx; // Update UI
+                        } else if (widthInput.value && heightInput.value) { // Both provided, ensure consistency
+                            // If ratio is off, prioritize width input to recalculate height
+                            if (Math.abs((targetWidthPx / targetHeightPx) - originalAspectRatio) > 0.001) { // Small tolerance for float errors
+                                targetHeightPx = Math.round(targetWidthPx / originalAspectRatio);
+                                heightInput.value = targetHeightPx; // Update UI
+                            }
+                        } else { // Both empty, revert to original
+                            targetWidthPx = originalImageWidth;
+                            targetHeightPx = originalImageHeight;
+                            widthInput.value = originalImageWidth; // Update UI
+                            heightInput.value = originalImageHeight; // Update UI
+                        }
+                    }
+
+                } else { // currentUnit is 'inches' or 'cm'
+                    let targetWidthPhysical = parseFloat(widthInput.value);
+                    let targetHeightPhysical = parseFloat(heightInput.value);
+
+                    // Default to original physical dimensions if inputs are invalid/empty
+                    // Calculate original physical dimensions based on 72 DPI (common default)
+                    const originalWidthPhysicalInches = originalImageWidth / originalDPI;
+                    const originalHeightPhysicalInches = originalImageHeight / originalDPI;
+
+                    if (isNaN(targetWidthPhysical) || targetWidthPhysical <= 0) targetWidthPhysical = originalWidthPhysicalInches;
+                    if (isNaN(targetHeightPhysical) || targetHeightPhysical <= 0) targetHeightPhysical = originalHeightPhysicalInches;
+                    
+                    // Convert to inches for calculation if unit is CM
+                    if (currentUnit === 'cm') {
+                        targetWidthPhysical *= INCHES_PER_CM;
+                        targetHeightPhysical *= INCHES_PER_CM;
+                    }
+
+                    // Apply aspect ratio lock for physical mode
+                    if (lockAspectCheckbox.checked) {
+                        const originalAspectRatio = originalImageWidth / originalImageHeight; // Aspect ratio is always based on pixels
+                        if (widthInput.value && !heightInput.value) { // Only width provided
+                            targetHeightPhysical = targetWidthPhysical / originalAspectRatio;
+                        } else if (heightInput.value && !widthInput.value) { // Only height provided
+                            targetWidthPhysical = targetHeightPhysical * originalAspectRatio;
+                        } else if (widthInput.value && heightInput.value) { // Both provided, ensure consistency
+                            if (Math.abs((targetWidthPhysical / targetHeightPhysical) - originalAspectRatio) > 0.001) {
+                                targetHeightPhysical = targetWidthPhysical / originalAspectRatio;
+                            }
+                        } else { // Both empty, revert to original physical size
+                            targetWidthPhysical = originalWidthPhysicalInches;
+                            targetHeightPhysical = originalHeightPhysicalInches;
+                        }
+
+                        // Update input fields with calculated physical dimensions
+                        if (currentUnit === 'cm') {
+                            widthInput.value = (targetWidthPhysical * CM_PER_INCH).toFixed(2);
+                            heightInput.value = (targetHeightPhysical * CM_PER_INCH).toFixed(2);
+                        } else {
+                            widthInput.value = targetWidthPhysical.toFixed(2);
+                            heightInput.value = targetHeightPhysical.toFixed(2);
+                        }
+                    }
+
+                    // Convert final physical dimensions (in inches) to target pixel dimensions using selected DPI
+                    targetWidthPx = Math.round(targetWidthPhysical * currentDPI);
+                    targetHeightPx = Math.round(targetHeightPhysical * currentDPI);
+                }
+
+                // Ensure dimensions are valid (at least 1x1)
+                targetWidthPx = Math.max(1, targetWidthPx);
+                targetHeightPx = Math.max(1, targetHeightPx);
+
+                canvas.width = targetWidthPx;
+                canvas.height = targetHeightPx;
+                
+                ctx.drawImage(originalImage, 0, 0, targetWidthPx, targetHeightPx);
+                
+                const format = formatSelect.value;
+                let mimeType = '';
+                switch (format) {
+                    case 'jpeg': mimeType = 'image/jpeg'; break;
+                    case 'png': mimeType = 'image/png'; break;
+                    case 'webp': mimeType = 'image/webp'; break;
+                    default: mimeType = 'image/jpeg'; // Fallback
+                }
+                const quality = qualitySlider.value / 100;
+
+                // Get image data as Blob for accurate size calculation and download
+                processedImageBlob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, mimeType, quality);
+                });
+
+                const processedImageDataURL = URL.createObjectURL(processedImageBlob);
+                
+                processedPreview.innerHTML = `<img src="${processedImageDataURL}" alt="Processed Image Preview">`;
+                
+                compareContainer.style.display = 'block';
+                document.getElementById('compareBefore').style.backgroundImage = `url(${originalImage.src})`;
+                document.getElementById('compareAfter').style.backgroundImage = `url(${processedImageDataURL})`;
+                
+                // Update stats
+                const processedSizeKB = (processedImageBlob.size / 1024).toFixed(1);
+                const originalSizeKB = (originalFileSize / 1024).toFixed(1);
+                const reduction = ((1 - (processedImageBlob.size / originalFileSize)) * 100).toFixed(1);
+                
+                compressedSizeDisplay.textContent = `${processedSizeKB} KB`;
+                reductionPercentDisplay.textContent = `${reduction}%`;
+                newDimensionsDisplay.textContent = `${targetWidthPx}×${targetHeightPx} px`;
+
+                // Update physical size display if units are physical
+                if (currentUnit !== 'pixels') {
+                    const finalWidthInches = targetWidthPx / currentDPI;
+                    const finalHeightInches = targetHeightPx / currentDPI;
+                    let physicalWidthFormatted, physicalHeightFormatted, physicalUnitLabel;
+
+                    if (currentUnit === 'inches') {
+                        physicalWidthFormatted = finalWidthInches.toFixed(2);
+                        physicalHeightFormatted = finalHeightInches.toFixed(2);
+                        physicalUnitLabel = 'in';
+                    } else if (currentUnit === 'cm') {
+                        physicalWidthFormatted = (finalWidthInches * CM_PER_INCH).toFixed(2);
+                        physicalHeightFormatted = (finalHeightInches * CM_PER_INCH).toFixed(2);
+                        physicalUnitLabel = 'cm';
+                    }
+                    newPhysicalSizeDisplay.textContent = `${physicalWidthFormatted}×${physicalHeightFormatted} ${physicalUnitLabel}`;
+                    newPhysicalSizeCard.style.display = 'block';
+                } else {
+                    newPhysicalSizeCard.style.display = 'none';
+                }
+                
+            } catch (error) {
+                console.error('Error processing image:', error);
+                processedPreview.innerHTML = '<p>Error processing image. Please try again.</p>';
+                alert('An error occurred during image processing. Please try again or upload a different image.');
+            } finally {
+                processingOverlay.classList.remove('active'); // Hide overlay
+                downloadBtn.disabled = false; // Re-enable download button
+            }
+        }
+        
+        // Download Button Click Handler
+        downloadBtn.addEventListener('click', () => {
+            if (!processedImageBlob) {
+                alert('No processed image available for download. Please upload and process an image first.');
+                return;
+            }
+            
+            try {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(processedImageBlob);
+                
+                const format = formatSelect.value;
+                const filenameWithoutExt = originalFileName.split('.').slice(0, -1).join('.');
+                link.download = `${filenameWithoutExt}_optimized.${format}`;
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                URL.revokeObjectURL(link.href); // Clean up the object URL
+                
+            } catch (error) {
+                console.error('Download failed:', error);
+                alert('Download failed. Please try again.');
+            }
+        });
+        
+        // Image Compare Slider Functionality
+        const compareHandle = document.getElementById('compareHandle');
+        const compareBefore = document.getElementById('compareBefore');
+        const compareAfter = document.getElementById('compareAfter');
+        let isDragging = false;
+        
+        compareHandle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            document.body.style.cursor = 'col-resize';
+            e.preventDefault(); 
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const containerRect = compareContainer.getBoundingClientRect();
+                let offsetX = e.clientX - containerRect.left;
+                offsetX = Math.max(0, Math.min(offsetX, containerRect.width)); // Clamp within container
+                const percentage = (offsetX / containerRect.width) * 100;
+                
+                compareAfter.style.width = `${percentage}%`;
+                compareHandle.style.left = `${percentage}%`;
+            }
+        });
+        
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.body.style.cursor = '';
+        });
+        
+        // Initial state on load (clear previews, reset stats)
+        window.addEventListener('load', () => {
+            originalPreview.innerHTML = '<p>Upload an image to see preview</p>';
+            processedPreview.innerHTML = '<p>Processed image will appear here</p>';
+            compareContainer.style.display = 'none';
+
+            originalSizeDisplay.textContent = '0 KB';
+            compressedSizeDisplay.textContent = '0 KB';
+            reductionPercentDisplay.textContent = '0%';
+            newDimensionsDisplay.textContent = '0×0 px';
+            newPhysicalSizeCard.style.display = 'none';
+            
+            downloadBtn.disabled = true;
+            toggleCustomDpiInput(); // Ensure custom DPI input is hidden initially
+        });
+    </script>
+</body>
+</html>
